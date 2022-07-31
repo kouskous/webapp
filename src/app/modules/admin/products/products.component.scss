@@ -1,0 +1,7 @@
+.inventory-grid {
+    grid-template-columns: 70px auto 80px;
+
+    @screen sm {
+        grid-template-columns: 70px auto 80px 80px 80px 80px;
+    }
+}

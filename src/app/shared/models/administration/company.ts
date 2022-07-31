@@ -1,0 +1,19 @@
+export class Company {
+  id: string = '';
+  addressCity: string = '';
+  addressCountry: string = '';
+  addressLabel: string = '';
+  addressZipCode: string = '';
+  business: string = '';
+  commercialRegisterNumber: string = '';
+  corporateName: string = '';
+  email: string = '';
+  faxNumber: string = '';
+  legalStatus: string = '';
+  ownerId: string = '';
+  phoneNumber: string = '';
+  statisticalIdentificationNumber: string = '';
+  taxArticleNumber: string = '';
+  taxIdentificationNumber: string = '';
+  type: string = '';
+}
