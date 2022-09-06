@@ -44,13 +44,13 @@ export class ProductsMockApi {
                     updateDate: new Date()
                 },
                 {
-                    id: 'p1',
-                    reference: 'pxx1',
-                    name: 'Product One ',
-                    description: 'Product One Description',
-                    priceExcludingTax: 150,
+                    id: 'p2',
+                    reference: 'pxx2',
+                    name: 'Product Two ',
+                    description: 'Product Two Description',
+                    priceExcludingTax: 300,
                     taxRate: 9,
-                    allTaxesIncludedPrice: 163.5,
+                    allTaxesIncludedPrice: 327,
                     companyId: 'comp1',
                     creationDate: new Date(),
                     updateDate: new Date()
