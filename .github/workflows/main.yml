@@ -13,6 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag registry.prixtotal.com/webapp:snapshot-${{github.run_number}}
+      run: docker build . --file Dockerfile --tag registry.prixtotal.com/webapp:latest
     - name: publish image
-      run: docker push registry.prixtotal.com/webapp:snapshot-${{github.run_number}}
+      run: docker push registry.prixtotal.com/webapp:latest
