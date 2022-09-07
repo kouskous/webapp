@@ -16,5 +16,3 @@ spec:
         - name: webapp
           image: registry.prixtotal.com/webapp:latest
           imagePullPolicy: Always
-          ports:
-            - containerPort: 80

@@ -1,8 +1,9 @@
 ### STAGE 1:BUILD ###
 FROM node:latest as build
 WORKDIR /usr/local/app
-COPY ./ /usr/local/app/
+COPY ./package.json /usr/local/app/
 RUN npm install
+COPY ./ /usr/local/app/
 RUN npm run build
 
 
