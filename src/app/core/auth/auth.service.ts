@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class AuthService
@@ -47,7 +48,7 @@ export class AuthService
      */
     forgotPassword(email: string): Observable<any>
     {
-        return this._httpClient.post('api/auth/forgot-password', email);
+        return this._httpClient.post(environment.backendUrl + '/authentication/forgot-password', email);
     }
 
     /**
@@ -57,7 +58,7 @@ export class AuthService
      */
     resetPassword(password: string): Observable<any>
     {
-        return this._httpClient.post('api/auth/reset-password', password);
+        return this._httpClient.post(environment.backendUrl + '/authentication/reset-password', password);
     }
 
     /**
@@ -73,7 +74,7 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(environment.backendUrl + '/authentication/login', credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
@@ -97,7 +98,7 @@ export class AuthService
     signInUsingToken(): Observable<any>
     {
         // Sign in using the token
-        return this._httpClient.post('api/auth/sign-in-with-token', {
+        return this._httpClient.post(environment.backendUrl + '/authentication/sign-in-with-token', {
             accessToken: this.accessToken
         }).pipe(
             catchError(() =>
@@ -149,11 +150,11 @@ export class AuthService
     /**
      * Sign up
      *
-     * @param user
+     * @param account
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
+    signUp(account: { firstname: string; lastname: string; email: string; password: string}): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post(environment.backendUrl + '/authentication/register', account);
     }
 
     /**
@@ -163,7 +164,7 @@ export class AuthService
      */
     unlockSession(credentials: { email: string; password: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/unlock-session', credentials);
+        return this._httpClient.post(environment.backendUrl + '/authentication/unlock-session', credentials);
     }
 
     /**
