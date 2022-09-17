@@ -1,23 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
-import { AuthUtils } from 'app/core/auth/auth.utils';
-import { UserService } from 'app/core/user/user.service';
-import { environment } from 'environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {catchError, Observable, of, switchMap, throwError} from 'rxjs';
+import {AuthUtils} from 'app/core/auth/auth.utils';
+import {environment} from 'environments/environment';
 
 @Injectable()
-export class AuthService
-{
+export class AuthService {
     private _authenticated: boolean = false;
 
     /**
      * Constructor
      */
-    constructor(
-        private _httpClient: HttpClient,
-        private _userService: UserService
-    )
-    {
+    constructor(private _httpClient: HttpClient) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -27,13 +21,11 @@ export class AuthService
     /**
      * Setter & getter for access token
      */
-    set accessToken(token: string)
-    {
+    set accessToken(token: string) {
         localStorage.setItem('accessToken', token);
     }
 
-    get accessToken(): string
-    {
+    get accessToken(): string {
         return localStorage.getItem('accessToken') ?? '';
     }
 
@@ -46,8 +38,7 @@ export class AuthService
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
-    {
+    forgotPassword(email: string): Observable<any> {
         return this._httpClient.post(environment.backendUrl + '/authentication/forgot-password', email);
     }
 
@@ -56,8 +47,7 @@ export class AuthService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
-    {
+    resetPassword(password: string): Observable<any> {
         return this._httpClient.post(environment.backendUrl + '/authentication/reset-password', password);
     }
 
@@ -66,11 +56,9 @@ export class AuthService
      *
      * @param credentials
      */
-    signIn(credentials: { email: string; password: string }): Observable<any>
-    {
+    signIn(credentials: { email: string; password: string }): Observable<any> {
         // Throw error, if the user is already logged in
-        if ( this._authenticated )
-        {
+        if (this._authenticated) {
             return throwError('User is already logged in.');
         }
 
@@ -83,8 +71,6 @@ export class AuthService
                 // Set the authenticated flag to true
                 this._authenticated = true;
 
-                // Store the user on the user service
-                this._userService.user = response.user;
 
                 // Return a new observable with the response
                 return of(response);
@@ -95,10 +81,9 @@ export class AuthService
     /**
      * Sign in using the access token
      */
-    signInUsingToken(): Observable<any>
-    {
+    signInUsingToken(): Observable<any> {
         // Sign in using the token
-        return this._httpClient.post(environment.backendUrl + '/authentication/sign-in-with-token', {
+        return this._httpClient.post(environment.backendUrl + '/authentication/login-with-token', {
             accessToken: this.accessToken
         }).pipe(
             catchError(() =>
@@ -115,16 +100,12 @@ export class AuthService
                 // in using the token, you should generate a new one on the server
                 // side and attach it to the response object. Then the following
                 // piece of code can replace the token with the refreshed one.
-                if ( response.accessToken )
-                {
+                if (response.accessToken) {
                     this.accessToken = response.accessToken;
                 }
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
-
-                // Store the user on the user service
-                this._userService.user = response.user;
 
                 // Return true
                 return of(true);
@@ -135,8 +116,7 @@ export class AuthService
     /**
      * Sign out
      */
-    signOut(): Observable<any>
-    {
+    signOut(): Observable<any> {
         // Remove the access token from the local storage
         localStorage.removeItem('accessToken');
 
@@ -152,8 +132,7 @@ export class AuthService
      *
      * @param account
      */
-    signUp(account: { firstname: string; lastname: string; email: string; password: string}): Observable<any>
-    {
+    signUp(account: { firstname: string; lastname: string; email: string; password: string }): Observable<any> {
         return this._httpClient.post(environment.backendUrl + '/authentication/register', account);
     }
 
@@ -162,35 +141,36 @@ export class AuthService
      *
      * @param credentials
      */
-    unlockSession(credentials: { email: string; password: string }): Observable<any>
-    {
+    unlockSession(credentials: { email: string; password: string }): Observable<any> {
         return this._httpClient.post(environment.backendUrl + '/authentication/unlock-session', credentials);
     }
 
     /**
      * Check the authentication status
      */
-    check(): Observable<boolean>
-    {
+    check(): Observable<boolean> {
         // Check if the user is logged in
-        if ( this._authenticated )
-        {
+        if (this._authenticated) {
             return of(true);
         }
 
         // Check the access token availability
-        if ( !this.accessToken )
-        {
+        if (!this.accessToken) {
             return of(false);
         }
 
         // Check the access token expire date
-        if ( AuthUtils.isTokenExpired(this.accessToken) )
-        {
+        if (AuthUtils.isTokenExpired(this.accessToken)) {
             return of(false);
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken();
+        //return this.signInUsingToken();
+        return of(true);
+    }
+
+    public getAccountIdFromToken(): string {
+        console.log(AuthUtils._decodeToken(this.accessToken).accountId);
+        return AuthUtils._decodeToken(this.accessToken).accountId;
     }
 }
