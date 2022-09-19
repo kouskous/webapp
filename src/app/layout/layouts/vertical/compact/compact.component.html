@@ -34,10 +34,28 @@
             <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
         </button>
         <!-- Components -->
-        <mat-select class="ml-10 w-50 font-semibold">
-            <mat-option value="select1-1" class="font-semibold">Prixtotal</mat-option>
-            <mat-option value="select1-2">Create New Company</mat-option>
-        </mat-select>
+        <!--  company selection -->
+        <button mat-button mat-flat-button
+                [matMenuTriggerFor]="companySelectionMenu"
+                class="bg-accent-100 ml-6"
+                *ngIf="selectedCompany">
+            <span>{{selectedCompany.corporateName}}</span>
+            <mat-icon [svgIcon]="'heroicons_outline:chevron-down'"></mat-icon>
+        </button>
+        <mat-menu
+            [xPosition]="'after'"
+            #companySelectionMenu="matMenu">
+            <button mat-menu-item *ngFor="let company of companies" (click)="setCompany(company)">
+                <span class="">{{company.corporateName}}</span>
+            </button>
+            <mat-divider class="my-2"></mat-divider>
+            <button
+                mat-menu-item
+                routerLink="/create-company">
+                <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+                <span>Create an Other Company</span>
+            </button>
+        </mat-menu>
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
             <languages></languages>
             <!--

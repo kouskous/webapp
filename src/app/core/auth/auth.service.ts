@@ -170,7 +170,6 @@ export class AuthService {
     }
 
     public getAccountIdFromToken(): string {
-        console.log(AuthUtils._decodeToken(this.accessToken).accountId);
         return AuthUtils._decodeToken(this.accessToken).accountId;
     }
 }

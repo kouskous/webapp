@@ -81,6 +81,25 @@ export const appRoutes: Route[] = [
         ]
     },
 
+    // route needing to be authenticated but don't use the main app layout
+    {
+        path: '',
+        component: LayoutComponent,
+        data: {
+            layout: 'empty'
+        },
+        resolve: {
+            initialData: InitialDataResolver,
+        },
+        children: [
+            {
+                path: 'create-company',
+                loadChildren: () => import('app/modules/admin/create-company/create-company.module').then(m => m.CreateCompanyModule)
+            }
+        ]
+    },
+
+
     // Admin routes
     {
         path: '',
@@ -94,10 +113,6 @@ export const appRoutes: Route[] = [
             {
                 path: 'dashboard',
                 loadChildren: () => import('app/modules/admin/dashboard/dashboard.module').then(m => m.DashboardModule)
-            },
-            {
-                path: 'administration',
-                loadChildren: () => import('app/modules/admin/administration/administration.module').then(m => m.AdministrationModule)
             },
             {
                 path: 'products',

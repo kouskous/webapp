@@ -1,0 +1,231 @@
+<div class="flex flex-col items-center justify-center w-full h-full">
+    <div class="w-full max-w-3xl">
+        <div class="mt-16 mb-8 text-3xl font-bold">Your Company Informations</div>
+
+        <form
+            class="p-4 bg-card shadow rounded overflow-hidden"
+            [formGroup]="formGroup">
+            <mat-horizontal-stepper
+                [linear]="true"
+                #horizontalStepper>
+                <mat-step
+                    [formGroupName]="'step1'"
+                    [stepControl]="formGroup.get('step1')"
+                    #horizontalStepperStep1>
+                    <ng-template matStepLabel>Basic</ng-template>
+                    <p class="my-6 font-medium">
+                        Fill in your basic information to let us know your preferences
+                    </p>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'corporateName'"
+                                [placeholder]="'Corporate Name'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'business'"
+                                [placeholder]="'Activity Area'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:briefcase'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex justify-end">
+                        <button
+                            class="px-8"
+                            mat-flat-button
+                            [color]="'primary'"
+                            [disabled]="horizontalStepperStep1.stepControl.pristine || horizontalStepperStep1.stepControl.invalid"
+                            type="button"
+                            matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+
+                <mat-step
+                    [formGroupName]="'step2'"
+                    [stepControl]="formGroup.get('step2')"
+                    #horizontalStepperStep2>
+                    <ng-template matStepLabel>Contact</ng-template>
+                    <p class="my-6 font-medium">
+                        People here will get to know you with this information
+                    </p>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'email'"
+                                [placeholder]="'Company Email'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'mat_outline:email'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'phoneNumber'"
+                                [placeholder]="'Phone Number'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:phone'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'addressLabel'"
+                                [placeholder]="'Address'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex space-x-4 flex-wrap">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'addressZipCode'"
+                                [placeholder]="'Zip Code'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'addressCity'"
+                                [placeholder]="'City'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:office-building'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button
+                            class="px-8 mr-2"
+                            mat-flat-button
+                            [color]="'accent'"
+                            type="button"
+                            matStepperPrevious>
+                            Back
+                        </button>
+                        <button
+                            class="px-8"
+                            mat-flat-button
+                            [color]="'primary'"
+                            type="button"
+                            matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+
+                <mat-step
+                    [formGroupName]="'step3'"
+                    [stepControl]="formGroup.get('step3')">
+                    <ng-template matStepLabel>Legal</ng-template>
+                    <p class="my-6 font-medium">
+                        We'll always let you know about important changes, but you pick what else you want to hear
+                        about.
+                    </p>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'legalStatus'"
+                                [placeholder]="'Legal Status (SARL, EURL, Physical person...)'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'capitalStock'"
+                                [placeholder]="'Capital Stock'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'attach_money'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'commercialRegisterNumber'"
+                                [placeholder]="'Commercial Register Number'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'mat_outline:menu_book'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <input
+                                matInput
+                                [formControlName]="'statisticalIdentificationNumber'"
+                                [placeholder]="'Statistical Identification Number'"
+                                required>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:chart-bar'"></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button
+                            class="px-8 mr-2"
+                            mat-flat-button
+                            [color]="'accent'"
+                            type="button"
+                            matStepperPrevious>
+                            Back
+                        </button>
+                        <button
+                            class="px-8"
+                            mat-flat-button
+                            [color]="'primary'"
+                            type="button"
+                            (click)="finishCreation()">
+                            Finish Creation
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </form>
+    </div>
+</div>
