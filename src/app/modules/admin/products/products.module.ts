@@ -11,11 +11,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {ProductEditionComponent} from './product-edition/product-edition.component';
+import {QuillEditorComponent} from 'ngx-quill';
 
 
 @NgModule({
     declarations: [
-        ProductsComponent
+        ProductsComponent,
+        ProductEditionComponent
     ],
     imports: [
         RouterModule.forChild(productsRoutes),
@@ -28,7 +31,8 @@ import {MatSortModule} from '@angular/material/sort';
         MatInputModule,
         MatPaginatorModule,
         MatSortModule,
-        FormsModule
+        FormsModule,
+        QuillEditorComponent
     ]
 })
 export class ProductsModule {

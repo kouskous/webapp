@@ -20,19 +20,20 @@
                     class="icon-size-5"
                     matPrefix></mat-icon>
                 <input
-                    [(ngModel)]="searchText"
+                    [(ngModel)]="keyword"
                     [autocomplete]="'off'"
                     [placeholder]="'Search products'"
+                    (keyup)="loadProducts()"
                     matInput>
             </mat-form-field>
             <!-- Add product button -->
             <button
-                (click)="createProduct()"
+                (click)="openProductEditionModal()"
                 [color]="'primary'"
                 class="ml-4"
                 mat-flat-button>
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">Add</span>
+                <span class=" mr-1">Add</span>
             </button>
         </div>
     </div>
@@ -42,12 +43,14 @@
 
         <!-- Products list -->
         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
-            <ng-container *ngIf="products?.length > 0; else noProducts">
+            <ng-container *ngIf="true; else noProducts">
                 <div class="grid">
                     <!-- Header -->
                     <div
                         class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
                         matSort
+                        matSortActive="name" matSortDirection="asc"
+                        (matSortChange)="sortChanged($event)"
                         matSortDisableClear>
                         <div [mat-sort-header]="'reference'">Reference</div>
                         <div [mat-sort-header]="'name'">Name</div>
@@ -57,24 +60,22 @@
                             Unit
                         </div>
                         <div
-                            [mat-sort-header]="'priceExcludingTax'"
                             class="hidden sm:block">
                             Unit Price
                         </div>
                         <div
-                            [mat-sort-header]="'taxRate'"
                             class="hidden sm:block">
                             Tax Rate
                         </div>
                         <div
-                            [mat-sort-header]="'allTaxesIncludedPrice'">
+                            [mat-sort-header]="'unitPrice'">
                             Price
                         </div>
                     </div>
                     <!-- Rows -->
-                    <ng-container *ngFor="let product of products">
-                        <div
-                            class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b cursor-pointer">
+                    <ng-container *ngFor="let product of productSearchResult?.elements">
+                        <div (click)="openProductEditionModal(product)"
+                             class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b cursor-pointer">
                             <div class="truncate">
                                 {{product.reference}}
                             </div>
@@ -86,10 +87,10 @@
                                 {{product.unit}}
                             </div>
                             <div class="truncate hidden sm:block">
-                                {{product.priceExcludingTax}} <span *ngIf="product.priceExcludingTax"> DA</span>
+                                {{product.unitPrice}} <span *ngIf="product.unitPrice"> DA</span>
                             </div>
                             <div class="truncate hidden sm:block">
-                                {{product.taxRate}} <span *ngIf="product.taxRate"> %</span>
+                                {{product.valueAddedTax?.value}} <span *ngIf="product.valueAddedTax?.value"> %</span>
                             </div>
                             <div class="truncate text-base font-semibold">
                                 {{product.allTaxesIncludedPrice}} <span *ngIf="product.allTaxesIncludedPrice"> DA</span>
@@ -99,17 +100,18 @@
                 </div>
 
                 <mat-paginator
-                    [length]="products?.length"
+                    [length]="productSearchResult?.totalElements"
                     [ngClass]="{'pointer-events-none': isLoading}"
-                    [pageIndex]="0"
+                    [pageIndex]="page"
                     [pageSizeOptions]="[5, 10, 25, 100]"
-                    [pageSize]="10"
+                    [pageSize]="size"
                     [showFirstLastButtons]="true"
+                    (page)="pageChanged($event)"
                     class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"></mat-paginator>
 
             </ng-container>
             <ng-template #noProducts>
-                <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">There are no
+                <div class="p-8 sm:p-16 border-t text-2xl font-semibold tracking-tight text-center">There are no
                     products!
                 </div>
             </ng-template>

@@ -80,6 +80,7 @@ export class CompactLayoutComponent implements OnInit, OnDestroy {
             this.companies = companies;
             if (companies.length > 0) {
                 this.selectedCompany = companies[0];
+                this.companyService.set(this.selectedCompany);
             } else {
                 this._router.navigate(['/create-company']);
             }
