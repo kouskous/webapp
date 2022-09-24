@@ -1,0 +1,10 @@
+{
+    "navigation": {
+        "dashboard": "Tableau de board",
+        "estimates": "Devis",
+        "invoices": "Factures",
+        "customers": "Clients",
+        "products": "Produits",
+        "administration": "Administration"
+    }
+}

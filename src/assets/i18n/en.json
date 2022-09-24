@@ -1,5 +1,10 @@
 {
-    "welcome-back": "Welcome back",
-    "Project": "Project",
-    "Analytics": "Analytics"
+    "navigation": {
+        "dashboard": "Dashboard",
+        "estimates": "Estimates",
+        "invoices": "Invoices",
+        "customers": "Customers",
+        "products": "Products",
+        "administration": "Administration"
+    }
 }
