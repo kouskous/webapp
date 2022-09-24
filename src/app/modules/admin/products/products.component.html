@@ -52,7 +52,7 @@
                         matSortActive="name" matSortDirection="asc"
                         (matSortChange)="sortChanged($event)"
                         matSortDisableClear>
-                        <div [mat-sort-header]="'reference'">Reference</div>
+                        <div class="hidden sm:block" [mat-sort-header]="'reference'">Reference</div>
                         <div [mat-sort-header]="'name'">Name</div>
                         <div
                             [mat-sort-header]="'unit'"
@@ -71,12 +71,15 @@
                             [mat-sort-header]="'unitPrice'">
                             Price
                         </div>
+                        <div>
+
+                        </div>
                     </div>
                     <!-- Rows -->
                     <ng-container *ngFor="let product of productSearchResult?.elements">
                         <div (click)="openProductEditionModal(product)"
                              class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b cursor-pointer">
-                            <div class="truncate">
+                            <div class="truncate hidden sm:block">
                                 {{product.reference}}
                             </div>
                             <div class="truncate">
@@ -94,6 +97,30 @@
                             </div>
                             <div class="truncate text-base font-semibold">
                                 {{product.allTaxesIncludedPrice}} <span *ngIf="product.allTaxesIncludedPrice"> DA</span>
+                            </div>
+                            <div (click)="$event.stopPropagation()">
+                                <button mat-icon-button [mat-menu-trigger-for]="productActions">
+                                    <mat-icon
+                                        [svgIcon]="'heroicons_outline:dots-vertical'"
+                                        class="icon-size-5"
+                                        matPrefix></mat-icon>
+                                </button>
+                                <mat-menu
+                                    [xPosition]="'before'"
+                                    #productActions="matMenu">
+                                    <button
+                                        (click)="openProductEditionModal(product)"
+                                        mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button
+                                        (click)="deleteProduct(product)"
+                                        mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                        <span>Delete</span>
+                                    </button>
+                                </mat-menu>
                             </div>
                         </div>
                     </ng-container>

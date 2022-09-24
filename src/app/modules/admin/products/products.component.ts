@@ -9,6 +9,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import {ProductEditionComponent} from './product-edition/product-edition.component';
 import {Product} from '../../../shared/models/products/product';
+import {FuseConfirmationService} from '../../../../@fuse/services/confirmation';
 
 @Component({
     selector: 'app-products',
@@ -34,6 +35,7 @@ export class ProductsComponent implements OnInit {
 
     constructor(private readonly productsService: ProductService,
                 private companyService: CompanyService,
+                private fuseConfirmationService: FuseConfirmationService,
                 private _matDialog: MatDialog) {
     }
 
@@ -77,5 +79,36 @@ export class ProductsComponent implements OnInit {
                     this.loadProducts();
                 }
             });
+    }
+
+    deleteProduct(product: Product): void {
+        const dialogRef = this.fuseConfirmationService.open({
+            title: 'Remove Product',
+            message: 'Are you sure you want to remove this product permanently?',
+            icon: {
+                show: true,
+                name: 'heroicons_outline:exclamation',
+                color: 'warn'
+            },
+            actions: {
+                confirm: {
+                    show: true,
+                    label: 'Remove',
+                    color: 'warn'
+                },
+                cancel: {
+                    show: true,
+                    label: 'Cancel'
+                }
+            },
+            dismissible: true
+        });
+        dialogRef.afterClosed().subscribe((answer) => {
+            if (answer === 'confirmed') {
+                this.productsService.delete(product).subscribe((result) => {
+                    this.loadProducts();
+                });
+            }
+        });
     }
 }

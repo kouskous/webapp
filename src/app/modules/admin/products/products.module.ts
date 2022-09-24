@@ -13,6 +13,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {ProductEditionComponent} from './product-edition/product-edition.component';
 import {QuillEditorComponent} from 'ngx-quill';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {QuillEditorComponent} from 'ngx-quill';
         MatPaginatorModule,
         MatSortModule,
         FormsModule,
-        QuillEditorComponent
+        QuillEditorComponent,
+        MatMenuModule
     ]
 })
 export class ProductsModule {
