@@ -103,6 +103,7 @@
                     class="order-first ml-2 sm:order-last"
                     mat-flat-button
                     [color]="'primary'"
+                    [disabled]="!formGroup.valid"
                     (click)="save()">
                     {{ t("products.save")}}
                 </button>
@@ -112,6 +113,7 @@
                     class="order-first ml-2 sm:order-last"
                     mat-flat-button
                     [color]="'primary'"
+                    [disabled]="!formGroup.valid"
                     (click)="save()">
                     {{ t("products.create")}}
                 </button>
