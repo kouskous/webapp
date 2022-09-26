@@ -1,4 +1,5 @@
 {
+    "title": "coucou",
     "navigation": {
         "dashboard": "Tableau de board",
         "estimates": "Devis",
@@ -6,5 +7,27 @@
         "customers": "Clients",
         "products": "Produits",
         "administration": "Administration"
+    },
+    "products": {
+        "title": "Produits",
+        "search": "Rechercher des produits",
+        "add": "Ajouter",
+        "reference": "Référence",
+        "unit": "Unité",
+        "name": "Nom",
+        "unitPrice": "Prix HT",
+        "vat": "TVA",
+        "ValueAddedTax": "Taxe sur la valeur ajoutée",
+        "allIncludedTaxPrice": "Prix TTC",
+        "noProducts": "There are no products!",
+        "createProduct": "Créer un produit",
+        "editProduct": "Modifier le produit",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "deleteProduct": "Supprimer le produit",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "create": "Créer",
+        "deletionConfirmation": "Êtes-vous sûr de vouloir supprimer ce produit ?"
     }
 }

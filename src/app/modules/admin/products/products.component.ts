@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ProductEditionComponent} from './product-edition/product-edition.component';
 import {Product} from '../../../shared/models/products/product';
 import {FuseConfirmationService} from '../../../../@fuse/services/confirmation';
+import {TranslocoService} from '@ngneat/transloco';
 
 @Component({
     selector: 'app-products',
@@ -36,6 +37,7 @@ export class ProductsComponent implements OnInit {
     constructor(private readonly productsService: ProductService,
                 private companyService: CompanyService,
                 private fuseConfirmationService: FuseConfirmationService,
+                private translocoService: TranslocoService,
                 private _matDialog: MatDialog) {
     }
 
@@ -83,8 +85,8 @@ export class ProductsComponent implements OnInit {
 
     deleteProduct(product: Product): void {
         const dialogRef = this.fuseConfirmationService.open({
-            title: 'Remove Product',
-            message: 'Are you sure you want to remove this product permanently?',
+            title: this.translocoService.translate('products.deleteProduct'),
+            message: this.translocoService.translate('products.deletionConfirmation'),
             icon: {
                 show: true,
                 name: 'heroicons_outline:exclamation',
@@ -93,7 +95,7 @@ export class ProductsComponent implements OnInit {
             actions: {
                 confirm: {
                     show: true,
-                    label: 'Remove',
+                    label: this.translocoService.translate('products.delete'),
                     color: 'warn'
                 },
                 cancel: {
