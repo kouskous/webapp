@@ -70,7 +70,7 @@ export class CompactLayoutComponent implements OnInit, OnDestroy {
             });
 
 
-        // get selected Company
+        // get selected Customer
         this.companyService.get().subscribe((company: Company) => {
             this.selectedCompany = company;
         });

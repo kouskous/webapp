@@ -4,7 +4,7 @@ import {Product} from '../models/products/product';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {ProductSearchResult} from '../models/products/products-search-result';
-import {SortDirectionEnum} from '../models/products/sort-direction-enum';
+import {SortDirectionEnum} from '../models/common/sort-direction-enum';
 
 @Injectable({
     providedIn: 'root'

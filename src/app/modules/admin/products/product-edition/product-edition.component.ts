@@ -61,12 +61,22 @@ export class ProductEditionComponent implements OnInit {
             },
             otherTaxes: []
         };
-        this.productService.create(product).subscribe({
-            next: (createdProduct: Product) => {
-                this.matDialogRef.close(createdProduct);
-            },
-            error: () => {
-            }
-        });
+        if (product.id) {
+            this.productService.update(product).subscribe({
+                next: (updatedProduct: Product) => {
+                    this.matDialogRef.close(updatedProduct);
+                },
+                error: () => {
+                }
+            });
+        } else {
+            this.productService.create(product).subscribe({
+                next: (createdProduct: Product) => {
+                    this.matDialogRef.close(createdProduct);
+                },
+                error: () => {
+                }
+            });
+        }
     }
 }

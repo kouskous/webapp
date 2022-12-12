@@ -4,7 +4,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ProductSearchResult} from '../../../shared/models/products/products-search-result';
 import {CompanyService} from '../../../shared/services/company.service';
 import {Company} from '../../../shared/models/administration/company';
-import {SortDirectionEnum} from '../../../shared/models/products/sort-direction-enum';
+import {SortDirectionEnum} from '../../../shared/models/common/sort-direction-enum';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import {ProductEditionComponent} from './product-edition/product-edition.component';

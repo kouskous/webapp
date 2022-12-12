@@ -1,0 +1,224 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium" *ngIf="customer">{{t('customers.editCustomer')}}</div>
+        <div class="text-lg font-medium" *ngIf="!customer">{{t('customers.createCustomer')}}</div>
+        <button
+            mat-icon-button
+            (click)="cancel()"
+            [tabIndex]="-1">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Compose form -->
+    <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+          [formGroup]="formGroup">
+
+        <div class="flex justify-center mb-2">
+            <div
+                class="flex p-0.5 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <button
+                    class="px-6"
+                    [ngClass]="{'bg-card pointer-events-none shadow': !isProfessional,
+                                'bg-transparent': isProfessional}"
+                    mat-flat-button
+                    (click)="switchIsProfessional()"
+                    disableRipple>
+                    Individual
+                </button>
+                <button
+                    class="px-6"
+                    [ngClass]="{'bg-card pointer-events-none shadow': isProfessional,
+                                'bg-transparent': !isProfessional}"
+                    mat-flat-button
+                    (click)="switchIsProfessional()"
+                    disableRipple>
+                    Professional
+                </button>
+            </div>
+        </div>
+
+        <p class="my-2 font-semibold">
+            General
+        </p>
+        <!-- corporateName -->
+        <div class="flex space-x-4 flex-wrap" *ngIf="isProfessional">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'legalStatus'"
+                    [placeholder]="'Legal Status (SARL, EURL, Physical person...)'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'corporateName'"
+                    [placeholder]="'Corporate Name'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:identification'"></mat-icon>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="flex-auto" *ngIf="isProfessional">
+            <input
+                matInput
+                [formControlName]="'business'"
+                [placeholder]="'Activity Area'">
+            <mat-icon
+                class="icon-size-5"
+                matPrefix
+                [svgIcon]="'heroicons_outline:briefcase'"></mat-icon>
+        </mat-form-field>
+
+        <div class="flex space-x-4 flex-wrap">
+            <mat-form-field class="flex-auto" *ngIf="!isProfessional">
+                <input
+                    matInput
+                    [formControlName]="'firstname'"
+                    [placeholder]="'Firstname'">
+            </mat-form-field>
+
+            <mat-form-field class="flex-auto" *ngIf="!isProfessional">
+                <input
+                    matInput
+                    [formControlName]="'lastname'"
+                    [placeholder]="'Lastname'">
+            </mat-form-field>
+        </div>
+
+        <p class="my-2 font-semibold">
+            Contact Information
+        </p>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'email'"
+                    [placeholder]="'Email'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'mat_outline:email'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'phoneNumber'"
+                    [placeholder]="'Phone Number'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:phone'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'addressLabel'"
+                    [placeholder]="'Address'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="flex space-x-4 flex-wrap">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'addressZipCode'"
+                    [placeholder]="'Zip Code'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'addressCity'"
+                    [placeholder]="'City'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:office-building'"></mat-icon>
+            </mat-form-field>
+        </div>
+        <p class="my-2 font-semibold" *ngIf="isProfessional">
+            Legal Information
+        </p>
+
+        <div class="flex space-x-4 flex-wrap" *ngIf="isProfessional">
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'commercialRegisterNumber'"
+                    [placeholder]="'Commercial Register Number'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'mat_outline:menu_book'"></mat-icon>
+            </mat-form-field>
+            <mat-form-field class="flex-auto">
+                <input
+                    matInput
+                    [formControlName]="'statisticalIdentificationNumber'"
+                    [placeholder]="'Statistical Identification Number'">
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_outline:chart-bar'"></mat-icon>
+            </mat-form-field>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+            <div class="-ml-2">
+                <!-- Attach file -->
+            </div>
+
+            <div class="flex items-center mt-4 sm:mt-0">
+                <!-- Discard -->
+                <button
+                    class="ml-auto sm:ml-0"
+                    mat-stroked-button
+                    (click)="cancel()">
+                    {{ t("customers.cancel")}}
+                </button>
+                <!-- save -->
+                <button
+                    *ngIf="customer"
+                    class="order-first ml-2 sm:order-last"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="!formGroup.valid"
+                    (click)="save()">
+                    {{ t("customers.save")}}
+                </button>
+                <!-- create -->
+                <button
+                    *ngIf="!customer"
+                    class="order-first ml-2 sm:order-last"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="!formGroup.valid"
+                    (click)="save()">
+                    {{ t("customers.create")}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

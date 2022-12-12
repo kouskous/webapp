@@ -1,22 +1,18 @@
-import {Member} from './member';
 import {Address} from '../common/address';
 
-export interface Company {
+export interface Customer {
     id?: string;
     corporateName?: string;
-    business?: string;
-
+    firstname?: string;
+    lastname?: string;
     address?: Address;
     email?: string;
     phoneNumber?: string;
     faxNumber?: string;
-
     legalStatus?: string;
-    capitalStock?: string;
+    business?: string;
     commercialRegisterNumber?: string;
     statisticalIdentificationNumber?: string;
-    taxArticleNumber?: string;
-    taxIdentificationNumber?: string;
-
-    members?: Member[];
+    creationDate?: Date;
+    updateDate?: Date;
 }
