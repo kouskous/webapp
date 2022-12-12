@@ -28,7 +28,7 @@
                     mat-flat-button
                     (click)="switchIsProfessional()"
                     disableRipple>
-                    Individual
+                    {{t('customers.individual')}}
                 </button>
                 <button
                     class="px-6"
@@ -37,13 +37,13 @@
                     mat-flat-button
                     (click)="switchIsProfessional()"
                     disableRipple>
-                    Professional
+                    {{t('customers.professional')}}
                 </button>
             </div>
         </div>
 
         <p class="my-2 font-semibold">
-            General
+            {{t('customers.general')}}
         </p>
         <!-- corporateName -->
         <div class="flex space-x-4 flex-wrap" *ngIf="isProfessional">
@@ -51,7 +51,7 @@
                 <input
                     matInput
                     [formControlName]="'legalStatus'"
-                    [placeholder]="'Legal Status (SARL, EURL, Physical person...)'">
+                    [placeholder]="t('customers.legalStatus')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -61,7 +61,7 @@
                 <input
                     matInput
                     [formControlName]="'corporateName'"
-                    [placeholder]="'Corporate Name'">
+                    [placeholder]="t('customers.corporateName')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -73,7 +73,7 @@
             <input
                 matInput
                 [formControlName]="'business'"
-                [placeholder]="'Activity Area'">
+                [placeholder]="t('customers.business')">
             <mat-icon
                 class="icon-size-5"
                 matPrefix
@@ -85,26 +85,26 @@
                 <input
                     matInput
                     [formControlName]="'firstname'"
-                    [placeholder]="'Firstname'">
+                    [placeholder]="t('customers.firstname')">
             </mat-form-field>
 
             <mat-form-field class="flex-auto" *ngIf="!isProfessional">
                 <input
                     matInput
                     [formControlName]="'lastname'"
-                    [placeholder]="'Lastname'">
+                    [placeholder]="t('customers.lastname')">
             </mat-form-field>
         </div>
 
         <p class="my-2 font-semibold">
-            Contact Information
+            {{t('customers.contact')}}
         </p>
         <div class="flex">
             <mat-form-field class="flex-auto">
                 <input
                     matInput
                     [formControlName]="'email'"
-                    [placeholder]="'Email'">
+                    [placeholder]="t('customers.email')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -116,7 +116,7 @@
                 <input
                     matInput
                     [formControlName]="'phoneNumber'"
-                    [placeholder]="'Phone Number'">
+                    [placeholder]="t('customers.phoneNumber')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -128,7 +128,7 @@
                 <input
                     matInput
                     [formControlName]="'addressLabel'"
-                    [placeholder]="'Address'">
+                    [placeholder]="t('customers.address')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -140,7 +140,7 @@
                 <input
                     matInput
                     [formControlName]="'addressZipCode'"
-                    [placeholder]="'Zip Code'">
+                    [placeholder]="t('customers.zipCode')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -150,7 +150,7 @@
                 <input
                     matInput
                     [formControlName]="'addressCity'"
-                    [placeholder]="'City'">
+                    [placeholder]="t('customers.city')">
                 <mat-icon
                     class="icon-size-5"
                     matPrefix
@@ -158,7 +158,7 @@
             </mat-form-field>
         </div>
         <p class="my-2 font-semibold" *ngIf="isProfessional">
-            Legal Information
+            {{t('customers.legals')}}
         </p>
 
         <div class="flex space-x-4 flex-wrap" *ngIf="isProfessional">
