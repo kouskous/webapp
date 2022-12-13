@@ -15,7 +15,7 @@ export class CustomerEditionComponent implements OnInit {
     formGroup: UntypedFormGroup;
     customer: Customer;
     company: Company;
-    isProfessional = false;
+    isProfessional;
 
     constructor(
         public matDialogRef: MatDialogRef<CustomerEditionComponent>,
@@ -44,6 +44,12 @@ export class CustomerEditionComponent implements OnInit {
             commercialRegisterNumber: [this.customer?.commercialRegisterNumber],
             statisticalIdentificationNumber: [this.customer?.statisticalIdentificationNumber],
         });
+
+        if (this.customer?.legalStatus && this.customer?.legalStatus !== 'NONE') {
+            this.isProfessional = true;
+        } else {
+            this.isProfessional = false;
+        }
 
         this.companyService.get().subscribe((company: Company) => {
             this.company = company;

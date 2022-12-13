@@ -33,7 +33,7 @@
     },
     "customers": {
         "title": "Clients",
-        "search": "Rechercher des client",
+        "search": "Rechercher des clients",
         "add": "Ajouter",
         "individual": "Particulier",
         "professional": "Professionel",
